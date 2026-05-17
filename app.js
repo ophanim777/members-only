@@ -52,3 +52,6 @@ passport.use(
             message: "Incorrect email",
           });
         }
+
+
+        const match = await bcrypt.compare(password, user.password);
