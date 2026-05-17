@@ -14,3 +14,5 @@ const { body, validationResult } = require("express-validator");
 const pool = require("./db/pool");
 
 const app = express();
+
+app.set("view engine", "ejs");
