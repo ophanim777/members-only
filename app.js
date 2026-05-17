@@ -10,3 +10,5 @@ const LocalStrategy = require("passport-local").Strategy;
 const bcrypt = require("bcryptjs");
 
 const { body, validationResult } = require("express-validator");
+
+const pool = require("./db/pool");
