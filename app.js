@@ -35,3 +35,14 @@ app.use(passport.session());
 
 passport.use(
   new LocalStrategy(
+     {
+      usernameField: "email",
+    },
+    async (email, password, done) => {
+      try {
+        const result = await pool.query(
+          "SELECT * FROM users WHERE email = $1",
+          [email]
+        );
+
+        const user = result.rows[0];
