@@ -82,4 +82,8 @@ passport.deserializeUser(async (id, done) => {
       "SELECT * FROM users WHERE id = $1",
       [id]
     );
-
+     done(null, result.rows[0]);
+  } catch (err) {
+    done(err);
+  }
+});
