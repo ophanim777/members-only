@@ -29,3 +29,5 @@ app.use(
     saveUninitialized: false,
   })
 );
+
+app.use(passport.initialize());
