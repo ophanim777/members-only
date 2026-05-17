@@ -12,3 +12,5 @@ const bcrypt = require("bcryptjs");
 const { body, validationResult } = require("express-validator");
 
 const pool = require("./db/pool");
+
+const app = express();
