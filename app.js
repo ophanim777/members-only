@@ -46,3 +46,9 @@ passport.use(
         );
 
         const user = result.rows[0];
+
+         if (!user) {
+          return done(null, false, {
+            message: "Incorrect email",
+          });
+        }
