@@ -18,3 +18,14 @@ const app = express();
 app.set("view engine", "ejs");
 
 app.use(express.urlencoded({ extended: true }));
+
+app.use(
+  session({
+    store: new pgSession({
+      pool: pool,
+    }),
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+  })
+);
