@@ -177,3 +177,24 @@ app.get("/logout", (req, res, next) => {
     res.redirect("/");
   });
 });
+
+app.get("/join-club", (req, res) => {
+  res.render("join-club");
+});
+
+app.post("/join-club", async (req, res) => {
+  if (req.body.passcode === process.env.CLUB_PASSCODE) {
+    await pool.query(
+      `
+      UPDATE users
+      SET membership_status = true
+      WHERE id = $1
+    `,
+      [req.user.id]
+    );
+
+    return res.redirect("/");
+  }
+
+  res.send("Wrong passcode");
+});
