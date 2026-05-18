@@ -245,3 +245,19 @@ app.post("/new-message", async (req, res) => {
 
   res.redirect("/");
 });
+
+app.post("/message/:id/delete", async (req, res) => {
+  if (!req.user.is_admin) {
+    return res.send("Unauthorized");
+  }
+
+  await pool.query(
+    `
+    DELETE FROM messages
+    WHERE id = $1
+  `,
+    [req.params.id]
+  );
+
+  res.redirect("/");
+});
