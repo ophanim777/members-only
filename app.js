@@ -132,3 +132,8 @@ app.post(
     if (!errors.isEmpty()) {
       return res.send(errors.array());
     }
+
+    const hashedPassword = await bcrypt.hash(
+  req.body.password,
+  10
+);
