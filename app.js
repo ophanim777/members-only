@@ -87,3 +87,18 @@ passport.deserializeUser(async (id, done) => {
     done(err);
   }
 });
+
+app.get("/", async (req, res) => {
+  const result = await pool.query(`
+    SELECT messages.*, users.first_name, users.last_name
+    FROM messages
+    JOIN users
+    ON messages.author_id = users.id
+    ORDER BY created_at DESC
+  `);
+
+  res.render("index", {
+    user: req.user,
+    messages: result.rows,
+  });
+});
