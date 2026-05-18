@@ -1,0 +1,50 @@
+<h1>Members Only</h1>
+
+<% if (user) { %>
+  <a href="/new-message">New Message</a>
+  <a href="/join-club">Join Club</a>
+  <a href="/logout">Logout</a>
+<% } else { %>
+  <a href="/login">Login</a>
+  <a href="/sign-up">Sign Up</a>
+<% } %>
+
+<hr>
+
+<% messages.forEach(message => { %>
+
+<div>
+  <h2><%= message.title %></h2>
+
+  <p><%= message.text %></p>
+
+  <% if (user && user.membership_status) { %>
+
+    <p>
+      By:
+      <%= message.first_name %>
+      <%= message.last_name %>
+    </p>
+
+    <p>
+      <%= message.created_at %>
+    </p>
+
+  <% } %>
+
+  <% if (user && user.is_admin) { %>
+
+    <form
+      action="/message/<%= message.id %>/delete"
+      method="POST"
+    >
+      <button>Delete</button>
+    </form>
+
+  <% } %>
+
+</div>
+
+<hr>
+
+<% }) %>
