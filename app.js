@@ -107,3 +107,6 @@ app.get("/", async (req, res) => {
 app.get("/sign-up", (req, res) => {
   res.render("sign-up");
 });
+
+app.post(
+  "/sign-up",
