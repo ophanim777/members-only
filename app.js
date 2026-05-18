@@ -155,3 +155,15 @@ await pool.query(
     res.redirect("/login");
   }
 );
+
+app.get("/login", (req, res) => {
+  res.render("login");
+});
+
+app.post(
+  "/login",
+  passport.authenticate("local", {
+    successRedirect: "/",
+    failureRedirect: "/login",
+  })
+);
