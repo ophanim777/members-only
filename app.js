@@ -198,3 +198,25 @@ app.post("/join-club", async (req, res) => {
 
   res.send("Wrong passcode");
 });
+
+
+app.get("/become-admin", (req, res) => {
+  res.render("admin");
+});
+
+app.post("/become-admin", async (req, res) => {
+  if (req.body.passcode === process.env.ADMIN_PASSCODE) {
+    await pool.query(
+      `
+      UPDATE users
+      SET is_admin = true
+      WHERE id = $1
+    `,
+      [req.user.id]
+    );
+
+    return res.redirect("/");
+  }
+
+  res.send("Wrong admin code");
+});
