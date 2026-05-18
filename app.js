@@ -220,3 +220,28 @@ app.post("/become-admin", async (req, res) => {
 
   res.send("Wrong admin code");
 });
+
+app.get("/new-message", (req, res) => {
+  if (!req.user) {
+    return res.redirect("/login");
+  }
+
+  res.render("new-message");
+});
+
+app.post("/new-message", async (req, res) => {
+  await pool.query(
+    `
+    INSERT INTO messages
+    (title, text, author_id)
+    VALUES ($1, $2, $3)
+  `,
+    [
+      req.body.title,
+      req.body.text,
+      req.user.id,
+    ]
+  );
+
+  res.redirect("/");
+});
