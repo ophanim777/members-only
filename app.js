@@ -102,3 +102,8 @@ app.get("/", async (req, res) => {
     messages: result.rows,
   });
 });
+
+
+app.get("/sign-up", (req, res) => {
+  res.render("sign-up");
+});
