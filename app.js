@@ -110,3 +110,9 @@ app.get("/sign-up", (req, res) => {
 
 app.post(
   "/sign-up",
+   [
+    body("firstName").trim().notEmpty(),
+    body("lastName").trim().notEmpty(),
+    body("email").isEmail(),
+    body("password")
+      .isLength({ min: 5 }),
