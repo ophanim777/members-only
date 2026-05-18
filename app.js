@@ -125,3 +125,10 @@ app.post(
       return true;
     }),
   ],
+
+  async (req, res) => {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      return res.send(errors.array());
+    }
